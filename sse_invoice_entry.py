@@ -14,7 +14,7 @@ import win32gui
 import win32con
 
 SSE_WINDOW_TITLE = "Gewinn-Erfassung"
-SLEEP = 0.04
+SLEEP = 0.001
 
 
 def send_json_export(filepath):
