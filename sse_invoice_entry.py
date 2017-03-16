@@ -14,7 +14,7 @@ import win32gui
 import win32con
 
 SSE_WINDOW_TITLE = "Gewinn-Erfassung"
-SLEEP = 0.001
+SLEEP = 0.01
 
 
 def send_json_export(filepath):
@@ -55,7 +55,7 @@ def send_invoice(hwnd, invoice):
     total = locale.currency(float(invoice['total']), symbol=False)
     name = '{} {}'.format(invoice['first_name'], invoice['last_name']).strip()
     date = datetime.datetime.strptime(invoice['date_paid'], '%Y-%m-%d').strftime('%d.%m.%y')
-    print('Entering data for {} {}, {}, {} €.'.format(number, date, name, total))
+    print('Entering data for {} {}, {}, {}.'.format(number, date, name, total))
 
     send_field(hwnd, number)
     send_field(hwnd, date)
