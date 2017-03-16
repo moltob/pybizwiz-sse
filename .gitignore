@@ -1,0 +1,18 @@
+# required artifacts created during setup/deployment
+bower_components/
+static-root/
+
+# temporary folders
+__pycache__/
+.cache/
+.idea/
+.vagrant/
+test/**/output/
+
+# temporary files
+*.bak
+*.log
+*.log.*
+*.mo
+*.pyc
+*.sqlite3 
