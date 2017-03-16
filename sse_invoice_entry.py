@@ -4,6 +4,7 @@ Utility to enter invoice data into SSE.
 After importing JSON from bizwiz, the file can be uploaded to SSE (Steuersparerklärung) by
 entering the corresponding data into the currently active table.
 """
+import argparse
 import datetime
 import json
 import locale
@@ -12,6 +13,7 @@ import win32gui
 
 import win32con
 
+SSE_WINDOW_TITLE = "Gewinn-Erfassung"
 SLEEP = 0.04
 
 
@@ -39,7 +41,7 @@ def find_tax_application_window():
     while hwnd_child:
         if win32gui.IsWindowVisible(hwnd_child):
             title = win32gui.GetWindowText(hwnd_child)
-            if "Gewinn-Erfassung" in title:
+            if SSE_WINDOW_TITLE in title:
                 return hwnd_child
 
         hwnd_child = win32gui.GetWindow(hwnd_child, win32con.GW_HWNDNEXT)
@@ -80,4 +82,7 @@ def send_tab(hwnd):
 
 
 if __name__ == '__main__':
-    send_json_export(r'D:\Home\Downloads\invoices (2).json')
+    parser = argparse.ArgumentParser(description='Send JSON export of invoices to SSE.')
+    parser.add_argument('file', help="Path to JSON export of invoices to send to SSE.")
+    args = parser.parse_args()
+    send_json_export(args.file)
