@@ -81,8 +81,12 @@ def send_tab(hwnd):
     time.sleep(SLEEP)
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description='Send JSON export of invoices to SSE.')
     parser.add_argument('file', help="Path to JSON export of invoices to send to SSE.")
     args = parser.parse_args()
     send_json_export(args.file)
+
+
+if __name__ == '__main__':
+    main()
