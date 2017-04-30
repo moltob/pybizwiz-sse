@@ -38,6 +38,10 @@ def find_tax_application_window():
     hwnd_desktop = win32gui.GetDesktopWindow()
     hwnd_child = win32gui.GetWindow(hwnd_desktop, win32con.GW_CHILD)
 
+    # let user select application and table cell (temporary workaround for 2017 version)
+    print("Please select first cell in target table.")
+    time.sleep(10)
+
     while hwnd_child:
         if win32gui.IsWindowVisible(hwnd_child):
             title = win32gui.GetWindowText(hwnd_child)
@@ -54,7 +58,7 @@ def send_invoice(hwnd, invoice):
     number = 'R{}'.format(invoice['number'])
     total = locale.currency(float(invoice['total']), symbol=False)
     name = '{} {}'.format(invoice['first_name'], invoice['last_name']).strip()
-    date = datetime.datetime.strptime(invoice['date_paid'], '%Y-%m-%d').strftime('%d.%m.%y')
+    date = datetime.datetime.strptime(invoice['date_paid'], '%Y-%m-%d').strftime('%d.%m')
     print('Entering data for {} {}, {}, {}.'.format(number, date, name, total))
 
     send_field(hwnd, number)
